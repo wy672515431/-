@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <title>付款</title>
+    <link rel="stylesheet" href={% static "css/search/bootstrap.min.css" %}>
+	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+	<script src={% static "js/search/bootstrap.min.js" %}></script>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <link rel="stylesheet" href={% static "css/search/rent.css" %}>
+    <link rel="stylesheet" href={%  static "css/search/pay.css" %}>
+    <script>
+        $(document).ready(function(){
+            $("#pay").click(function(){
+                $.post("",{ispay:true});
+                alert("缴费成功，请关闭网页！");
+            });
+        })
+    </script>
+</head>
+<body class="vsc-initialized">
+    <div class="wechat_tip">
+        <div class="clearfix">
+            <div class="order pull-left">
+                <div>
+                    订单编号：<span class="ML5">{{ order.id }}</span>
+                </div>
+            </div>
+            <div class="count pull-right">
+                应付金额：<span class="green FZ22 ML5">￥<span>{{ order.money }}</span></span>
+            </div>
+        </div>
+    </div>
+    <div class="wechat_code">
+        <div class="pull-left">
+            <div>
+                <img src={% static "img/1234.jpg" %} width="287" height="289">
+            </div>
+            <div class="code-bottom">
+                <img src={% static "img/saomiao.png" %}>
+                <div class="code-tip">请使用微信扫一扫二维码<br>以完成支付</div>
+            </div>
+        </div>
+        <div class="wechat_ERP pull-right">
+            <img src={% static "img/bg-tip.png" %}>
+            <div class="tip-title">
+                <img src={% static "img/ERP.png" %}>
+                <span class="tip-txt">注意事项</span>
+            </div>
+            <ul class="tip-ul">
+                <li>
+                    如网页未自动关闭，请手动关闭标签
+                </li>
+                <li>
+                    支付成功后，可能会有延迟，请耐心等待或联系网站客服
+                </li>
+                <li>
+                    支付成功后，请点击下方的已缴费按钮
+                </li>
+            </ul>
+            <div>
+                <button class="applyButton" style="margin-top: 60px" id="pay">已缴费</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

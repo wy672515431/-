@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta charset="utf-8">
+	<title></title>
+	<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Title</title>
+    <link href="../static/css/Style.css" rel="stylesheet" type="text/css">
+
+</head>
+<body style="background: #f5f5f5">
+<nav class="navbar navbar-inverse">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="www.baidu.com">网站名</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li><a href="../../index/">首页</a></li>
+                    <li class><a href="rent/search/">租房</a></li>
+                    <li><a href="#">我有房租</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+<div class="container">
+    <ul class="col-lg-12" style="list-style: none" >
+  <div class="row">
+  <!-- 导航栏 -->
+    <div class="col-sm-3" style="background:white;border:rgb(238, 238, 238) solid;border-radius: 10px">
+        <nav class="navbar navbar" role="navigation">
+      <h3 style="text-align:center">
+          <font color = "black">我的账户</font>
+      </h3>
+      <ul class="nav nav-pills nav-stacked">
+        <li style="text-align:center"><a herf="../"  onclick="window.location.href='../'">基本信息</a></li>
+        <li style="text-align:center"><a href="../all_orders/" onclick="window.location.href='../all_orders/'">我的订单</a></li>
+        <li class="active" style="text-align:center"><a href="">我的工单</a></li>
+              <li style="text-align:center"><a href="../account_subscribe/" onclick="window.location.href='../account_subscribe/'">查看投诉</a></li>
+        <li style="text-align: center"><a href="#">看房记录</a></li>
+        <li style="text-align: center"><a href="#">我的搜索</a></li>
+        <li style="text-align: center"><a href="#">我的问答</a></li>
+        <li style="text-align: center"><a href="#">我的经纪人</a></li>
+      </ul>
+      <hr class="hidden-sm hidden-md hidden-lg">
+            <br />
+        </nav>
+    </div>
+  <!-- 工单 -->
+    <div class="col-sm-8">
+        {% for re_orders in page %}
+            <li class="col-lg-12">
+                <div class="card w-75 text-center" style="background:white;border:rgb(238, 238, 238) solid;border-radius: 10px">
+                    <div class="card-body">
+                        <h4 class="card-title">工单号{{ re_orders.id }}</h4>
+                        <p class="card-text">
+                            维修时间{{ re_orders.begintime }}
+                            <br />
+                            维修师傅{{ re_orders.worker.username }}
+                            <br />
+                            对应订单号{{ re_orders.rentorder.id }}
+                            <br />
+                            状态{{ re_orders.state }}
+                        </p>
+                        {% if re_orders.state == "ture" %}
+                            <!-- 弹出评价框 -->
+                        <input type="button" class="btn btn-primary" data-toggle="modal" data-target="#Revert" onclick="Values(2)" value="评价">
+                        <div class="modal fade" id="Revert" tabindex="-1" role="dialog" aria-labelledby="mymodalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header" style="text-align: center">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                            &times;
+                                        </button>
+                                        <h4 class="modal-title" id="mymymodalLabel" style="text-align: center">
+                                            评价
+                                        </h4>
+                                    </div>
+                                    <center>
+                                        <form method="POST" action="" target="notJump" id="jsForm" onsubmit="return returnToConfirm()" class="form-horizontal">
+                                            <div class="modal-body" >
+                                                <div class="sidebar_body">
+                                                    <div class="sidebar_title">
+                                                        用户反馈
+                                                    </div>
+                                                    <div class="sidebar_main">
+                                                        <div class="star_origin">
+                                                            <div id="star">
+                                                                <ul>
+                                                                    <li><a href="javascript:;">1</a></li>
+                                                                    <li><a href="javascript:;">2</a></li>
+                                                                    <li><a href="javascript:;">3</a></li>
+                                                                    <li><a href="javascript:;">4</a></li>
+                                                                    <li><a href="javascript:;">5</a></li>
+                                                                </ul>
+                                                                <p class="tip"></p>
+                                                            </div>
+                                                        </div>
+                                                        <div>
+                                                            <textarea id="content" name="content" class="content_input" placeholder="请输入您的建议..."></textarea>
+                                                        </div>
+                                                        <input type="hidden" name="score" id="score">
+                                                        <input type="hidden" name="platform" id="platform">
+                                                        <input type="hidden" id='id' name='id' value=" ">
+                                                        <button type="submit" id="btn" name="tijiao" type="button" class="btn_button">提交</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </center>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </li>
+            {% endfor %}
+    </div>
+  <!-- 翻页功能 -->
+  <div class="col-lg-6 col-md-6 col-lg-offset-10 col-md-offset-6">
+            <ul class="pagination">
+
+            {% if page.has_previous %}
+                <a href="?page={{ page.previous_page_number }}">&laquo;</a>  <!--此处的跳转不清楚写什么-->
+            {% endif %}
+
+            {% for pindex in pageRange %}
+                {% if pindex == current_num %}
+                    <a href="?page={{ pindex }}" class="active">{{ pindex }}</a>
+                {% else %}
+                    <a href="?page={{ pindex }}">{{ pindex }}</a>
+                {% endif %}
+            {% endfor %}
+
+            {% if page.has_next %}
+                <a href="?page={{ page.next_page_number }}">&raquo;</a>
+            {% endif %}
+            </ul>
+        </div>
+  </div>
+    </ul>
+</div>
+<!--页脚-->
+    <footer style=" background-color: rgb(0,0,0); color: rgb(255, 255, 255); padding: 30px 50px;height: auto;width: 100%;margin-top: 80px;">
+        <div style="display: flex; flex-direction: column; align-items: center;">
+            <div style="margin: 8px 0px;">Copyright ©2020  by 王勇
+            </div>
+            <div style="margin: 8px 0px;">违法和不良信息举报电话：010-86440676 违法和不良信息举报邮箱：672515431@qq.com</div>
+            <div style="margin: 8px 0px;">联系电话:18888888888</div>
+            <div style="width: 300px;height: 1px; background-color: #FFFFFF;margin-top: 20px;"></div>
+        </div>
+    </footer>
+<script src="../static/js/jquery-2.1.4.min.js"></script>
+<script src="../static/js/jquery-3.3.1.min.js"></script>
+<script src="../static/js/jquery.cookie.js"></script>
+<script src="../static/js/bootstrap.js"></script>
+<script src="../static/js/slider.js"></script>
+<script src="../static/js/MAIN.js"></script>
+<script src="../static/js/feedback.js"></script>
+<script>
+    $("#Revert").modal("hide");
+    function Values(ID) {
+        $("#id").val(ID);
+    }
+</script>
+</body>
+</html>

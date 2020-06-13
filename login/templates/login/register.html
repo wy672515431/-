@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+    <link rel="stylesheet" href="/static/css/login/register.css" type="text/css" >
+</head>
+<body>
+    <div class="demo" id="demo-5">
+        <div><p>青年租房网站</p></div>
+    </div>
+    <div class="container">
+        <h1>欢迎注册</h1><br>
+        <P id="p1"><a href="../login/">已经拥有账号？登录</a></P><br>
+        <form class="form-register" action="{%url 'register'%}" method="post" >
+            {% csrf_token %}
+            <p id="p2">邮箱地址</p>
+            <input type="email" name="email" autofocus required="required"><br>
+            <p id="p2">用户名</p>
+            <input type="text" name="username" required="required"><br>
+            <p id="p2">密码</p>
+            <input type="password" name="password1" required="required"><br>
+            <p id="p2">确认密码</p>
+            <input type="password" name="password2" required="required"><span id="tishi"></span><br>
+            <button type="submit" class="btn btn-primary float-right" >注册</button>
+        </form>
+    {% if message %}
+        <div class="alert-warning">{{ message }}</div>
+    {% endif %}
+    </div>
+</body>
+</html>

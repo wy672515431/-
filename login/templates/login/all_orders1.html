@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta charset="utf-8">
+	<title></title>
+	<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Title</title>
+</head>
+<body style="background: #f5f5f5">
+<nav class="navbar navbar-inverse">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="www.baidu.com">网站名</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li><a href="#">首页</a></li>
+                    <li><a href="#">租房</a></li>
+                    <li><a href="#">我有房租</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+<div class="container">
+<ul class="col-lg-12" style="list-style: none" >
+  <div class="row">
+  <!-- 导航栏 -->
+    <div class="col-sm-3" style="background: white;border-radius: 3px">
+        <nav class="navbar navbar" role="navigation">
+      <h3 style="text-align:center">
+          <font color = "black">我的账户</font>
+      </h3>
+      <ul class="nav nav-pills nav-stacked">
+        <li style="text-align:center"><a herf="" onclick="window.location.href=''">基本信息</a></li>
+        <li class="active" style="text-align:center"><a herf='all_orders'>我的订单</a></li>
+        <li style="text-align:center"><a href="repair_orders" onclick="window.location.href='repair_orders.html'">我的工单</a></li>
+        <li style="text-align:center"><a href="subscribe" onclick="window.location.href='subscribe.html'">查看投诉</a></li>
+        <li style="text-align: center"><a href="#">看房记录</a></li>
+        <li style="text-align: center"><a href="#">我的搜索</a></li>
+        <li style="text-align: center"><a href="#">我的问答</a></li>
+        <li style="text-align: center"><a href="#">我的经纪人</a></li>
+      </ul>
+      <hr class="hidden-sm hidden-md hidden-lg">
+            <br />
+        </nav>
+    </div>
+  <!-- 订单 -->
+    <div class="col-sm-8">
+            {% for orders in page %}
+            <li class="col-lg-12">
+                <div class="card w-75 text-center" style="background:white;border:rgb(238, 238, 238) solid;border-radius: 10px">
+                    <div class="card-body">
+                        <h4 class="card-title">{{ orders.housename }}</h4>
+                        <p class="card-text">
+                            订单号{{ orders.id }}
+                            <br />
+                            订单类型{{ orders.class }}
+                            <br />
+                            是否受理{{ orders.state }}
+                        </p>
+                        {% if orders.state == 'true' %}
+                            <div>
+                                <a class="applyButton btn btn-primary" >跳转<a/>
+                            </div>
+                         {% endif %}
+                    </div>
+                </div>
+            </li>
+            {% endfor %}
+    </div>
+  <!-- 翻页功能 -->
+  <div class="col-lg-6 col-md-6 col-lg-offset-10 col-md-offset-6">
+            <ul class="pagination">
+
+            {% if page.has_previous %}
+                <a href="?page={{ page.previous_page_number }}">&laquo;</a>  <!--此处的跳转不清楚写什么-->
+            {% endif %}
+
+            {% for pindex in pageRange %}
+                {% if pindex == current_num %}
+                    <a href="?page={{ pindex }}" class="active">{{ pindex }}</a>
+                {% else %}
+                    <a href="?page={{ pindex }}">{{ pindex }}</a>
+                {% endif %}
+            {% endfor %}
+
+            {% if page.has_next %}
+                <a href="?page={{ page.next_page_number }}">&raquo;</a>
+            {% endif %}
+            </ul>
+        </div>
+  </div>
+</ul>
+</div>
+<!--页脚-->
+    <footer style=" background-color: rgb(0,0,0); color: rgb(255, 255, 255); padding: 30px 50px;height: auto;width: 100%;margin-top: 80px;">
+        <div style="display: flex; flex-direction: column; align-items: center;">
+            <div style="margin: 8px 0px;">Copyright ©2020  by 王勇
+            </div>
+            <div style="margin: 8px 0px;">违法和不良信息举报电话：010-86440676 违法和不良信息举报邮箱：672515431@qq.com</div>
+            <div style="margin: 8px 0px;">联系电话:18888888888</div>
+            <div style="width: 300px;height: 1px; background-color: #FFFFFF;margin-top: 20px;"></div>
+        </div>
+    </footer>
+</body>
+</html>

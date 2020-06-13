@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>青年租房网站</title>
+    <link rel="stylesheet" href="/static/css/search/bootstrap.min.css">
+	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+	<script src="/static/js/search/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/static/css/search/rent.css">
+    <style>
+        @font-face{
+          font-family: pacifico;
+            src:url("/static/fonts/pacifico.woff");
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar navbar-inverse">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="www.baidu.com">网站名</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li><a href="../../index">首页</a></li>
+                    <li class="active"><a href="">租房</a></li>
+                    <li><a href="">我有房租</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!--搜索框-->
+    <div class="container">
+        <form method="post" action="{% url 'search'%}"><!--没有写action,我想要在同一页面下展示查找到的房源-->
+            {% csrf_token %}
+            <div class="form-inline col-lg-12" style="padding: 0">
+                <input type="text"name="keyword" class="form-control input-lg" placeholder="请输入区域、商圈或小区名开始找房" style="font-family: 仿宋;font-size: medium;width:94%">
+                <input type="submit" class="btn btn-default" style="width: 5%;height: 43px;background-color: #eeeeee" value="查询" name="关键字">
+            </div>
+        </form>
+    </div>
+    <br>
+    <!--筛选条件-->
+    <div class="container">
+        <div class="filter">
+            <form role="form" method="post" action="{% url 'search'%}"> <!--这里也没有写action，也是想在同一页面下展示查找到的房源-->
+                {% csrf_token %}
+                <div class="form-group"><span style="font-weight: bolder">区域：</span> <!--变量名为name,可能是多个值-->
+                    <label class="checkbox-inline">
+                        <input type="checkbox" name="area" value="1">不限
+                    </label>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" name="area" value="2">朝阳区
+                    </label>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" name="area" value="3">海淀区
+                    </label>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" name="area" value="4">昌平区
+                    </label>
+                </div>
+                <div class="form-group"><span style="font-weight: bolder">租金：</span><!--变量名为price,可能是多个值-->
+                    <label class="checkbox-inline" >
+                        <input type="checkbox" name="rental" value="1">≤1000元
+                    </label>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" name="rental" value="2">1000-1500元
+                    </label>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" name="rental" value="3">1500-2000元
+                    </label>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" name="rental" value="4">2000-3000元
+                    </label>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" name="rental" value="5">≥3000元
+                    </label>
+                </div>
+                <div class="form-group"><span style="font-weight: bolder">户型：</span><!--变量名为houseType,可能是多个值-->
+                    <label class="checkbox-inline">
+                        <input type="checkbox" name="type" value="1">单人间
+                    </label>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" name="type" value="2">双人间
+                    </label>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" name="type" value="3">三人间
+                    </label>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" name="type" value="4">四人间
+                    </label>
+                </div>
+                <div class="form-group"><span style="font-weight: bolder">电梯：</span><!--变量名为elevator,可能是多个值-->
+                    <label class="checkbox-inline">
+                        <input type="checkbox" name="elevator" value="1">有电梯
+                    </label>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" name="elevator" value="2">无电梯
+                    </label>
+                </div>
+                <div class="col-lg-2 col-md-2 col-lg-offset-8 col-md-offset-8">
+                    <button type="submit" class="btn" >查找房源</button>
+                </div>
+                <div class="col-lg-2 col-md-2">
+                    <button type="reset" class="btn" >清空条件</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br>
+    <!--展示房源信息，应该是有多个page，每个page有多个item,应当安排一个默认page，作为没有搜索条件时的显示-->
+    <div class="container">
+        <ul class="col-lg-12" style="list-style: none" >
+            {% for house in page %}
+            <li class="col-lg-12">
+                <div class="col-lg-3 col-md-3">
+                    <div class="thumbnail">
+                        <a href="{% url 'house:house' house_id=house.id %}">
+                            <img src="{% static house.image %}">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-9 col-md-9">
+                    <div class="caption">
+                        <div class="col-lg-6">
+                            <a class="h2" href="{%url 'house:house' house_id=house.id %}">{{ house.housename }}/{{ house.type }}</a>
+                        </div>
+                        <span class="price">{{ house.rental }}元/天</span>
+                    </div>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="container">
+        <div class="col-lg-6 col-md-6 col-lg-offset-10 col-md-offset-6">
+            <ul class="pagination">
+
+            {% if page.has_previous %}
+                <a href="?page={{ page.previous_page_number }}">&laquo;</a>  <!--此处的跳转不清楚写什么-->
+            {% endif %}
+
+            {% for pindex in pageRange %}
+                {% if pindex == current_num %}
+                    <a href="?page={{ pindex }}" class="active">{{ pindex }}</a>
+                {% else %}
+                    <a href="?page={{ pindex }}">{{ pindex }}</a>
+                {% endif %}
+            {% endfor %}
+
+            {% if page.has_next %}
+                <a href="?page={{ page.next_page_number }}">&raquo;</a>
+            {% endif %}
+            </ul>
+        </div>
+    </div>
+    <div class="jumbotron text-center" style="margin-bottom:0">
+        <p>底部内容</p>
+    </div>
+</body>
+</html>

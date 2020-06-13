@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+
+    <title>青年租房网站</title>
+    <link rel="stylesheet" href={% static "css/search/bootstrap.min.css" %}>
+	<script src={% static "js/search/jquery-2.1.4.min.js" %}></script>
+	<script src={% static "js/search/bootstrap.min.js" %}></script>
+    <script src={% static "js/search/jquery-2.1.4.min.js" %}></script>
+    <link rel="stylesheet" href={% static "css/search/rent.css" %}>
+    <style>
+        @font-face{
+          font-family: pacifico;
+            src:url("/static/fonts/pacifico.woff");
+        }
+    </style>
+
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar navbar-inverse">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand">网站名</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li><a href="{% url 'index' %}">首页</a></li>
+                    <li><a href="{% url 'search' %}">租房</a></li>
+                    <li><a href="#">我有房租</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row clearfix">
+            <div class="col-lg-6 col-md-6">
+                <div class="thumbnail">
+                    <a>
+                        <img src="{% static House.image %}">
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <div class="caption">
+                    <div>
+                        <a class="h2">{{House.housename}}</a>
+                    </div>
+                    <span class="price">{{ House.rental }}元/天</span>
+                </div>
+                <div class="houseInfo">
+                    <div class="room">
+                        <div class="mainInfo">{{ House.type }}</div>
+                        <div class="subInfo">户型</div>
+                    </div>
+                    <div class="area">
+                        <div class="mainInfo">{{ House.area }}</div>
+                        <div class="subInfo">区域</div>
+                    </div>
+                    <div class="elevator">
+                        <div class="mainInfo">{{ House.elevator }}</div>
+                        <div class="subInfo">有无电梯</div>
+                    </div>
+                </div>
+                <div class="aroundInfo">
+                    <div class="aroundInfo_detail">
+                        <span class="label">客服人员</span>
+                        <span class="info">王勇</span>
+                    </div>
+                    <div class="aroundInfo_detail">
+                        <span class="label">联系电话</span>
+                        <span class="info">18888888888</span>
+                    </div>
+                    <div class="aroundInfo_detail">
+                        <span class="label">看房时间</span>
+                        <span class="info">提前预约随时可看</span>
+                    </div>
+                </div>
+                <div>
+                    <button class="applyButton" data-toggle="modal" data-target="#longModal">长租（按月）</button>
+                </div>
+                <div>
+                    <button class="applyButton" data-toggle="modal" data-target="#shortModal">短租（按天）</button>
+                </div>
+                <div class="modal fade" id="longModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                    &times;
+                                </button>
+                                <h4 class="modal-title" id="myModalLabel1">
+                                    长租订单
+                                </h4>
+                            </div>
+                            <form class="form-inline" method="post"  action="{% url 'house:house' house_id=House.id %}">
+                            <div class="modal-body">
+                                <h5>订单号：这个订单号如何得到待讨论</h5>
+                                     {% csrf_token %}
+                                    <input type="hidden" name = "orderType" value="short">
+                                    起始时间：<input type="date" name="begin" id="begin1" required placeholder="租房开始生效的时间"><br>
+                                    月数：<input type="number" name="numOfMon" min="0" id="1" required placeholder="请输入为租房月数"  onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"/><br>
+                            </div>
+                            <div class="modal-footer " style="width:100%">
+                                <button type="button" class="btn btn-default" data-dismiss="modal" style="width:20%">关闭</button>
+                                <button type="submit" class="btn btn-primary" id="longOrder" name = "orderType" style="width:25%" value="1">提交订单</button>
+                            </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal fade" id="shortModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                    &times;
+                                </button>
+                                <h4 class="modal-title" id="myModalLabel2">
+                                    短租订单
+                                </h4>
+                            </div>
+                            <form class="form-inline" method="post"   action="{% url 'house:house' house_id=House.id %}">
+                            <div class="modal-body">
+                                <h5>订单号：22222</h5>
+                                    {% csrf_token %}
+                                    <input type="hidden" name = "orderType" value="short">
+                                    起始时间：<input type="date" name="begin" id="begin2" required placeholder="租房开始生效的时间"><br>
+                                    天数：<input type="number" name="numOfDay" id="2" min="0" required placeholder="请输入为租房天数"  onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"><br>
+                            </div>
+                            <div class="modal-footer " style="width:100%">
+                                <button type="button" class="btn btn-default" data-dismiss="modal" style="width:20%">关闭</button>
+                                <button type="submit" class="btn btn-primary" id="shortOrder" name = "orderType" style="width:25%" value="2" onclick="alert('审核中，请稍后到我的订单页面查看审核结果')">提交订单</button>
+                            </div>
+                           </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!--页脚-->
+    <footer style=" background-color: rgb(0,0,0); color: rgb(255, 255, 255); padding: 30px 50px;height: auto;width: 100%;margin-top: 80px;">
+        <div style="display: flex; flex-direction: column; align-items: center;">
+            <div style="margin: 8px 0px;">Copyright ©2020  by 王勇
+            </div>
+            <div style="margin: 8px 0px;">违法和不良信息举报电话：010-86440676 违法和不良信息举报邮箱：672515431@qq.com</div>
+            <div style="margin: 8px 0px;">联系电话:18888888888</div>
+            <div style="width: 300px;height: 1px; background-color: #FFFFFF;margin-top: 20px;"></div>
+        </div>
+    </footer>
+</body>
+</html>

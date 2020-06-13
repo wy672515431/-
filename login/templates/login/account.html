@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta charset="utf-8">
+	<title></title>
+	<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Title</title>
+</head>
+<body style="background: #f5f5f5">
+<nav class="navbar navbar-inverse">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="www.baidu.com">网站名</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li><a href="../index/">首页</a></li>
+                    <li class><a href="#">租房</a></li>
+                    <li><a href="#">我有房租</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+<div class="container">
+    <ul class="col-lg-12" style="list-style: none" >
+  <div class="row">
+      <!-- 导航栏 -->
+    <div class="col-sm-3" style="background:white;border:rgb(238, 238, 238) solid;border-radius: 10px">
+        <nav class="navbar navbar" role="navigation">
+      <h3 style="text-align:center">
+          <font color = "black">我的账户</font>
+      </h3>
+      <ul class="nav nav-pills nav-stacked">
+        <li class="active" style="text-align:center"><a herf="">基本信息</a></li>
+        <li style="text-align:center"><a href="all_orders/" onclick="window.location.href='account/all_orders/'">我的订单</a></li>
+        <li style="text-align:center"><a href="repair_orders/" onclick="window.location.href='account/repair_orders/'">我的工单</a></li>
+          <li style="text-align:center"><a href="account_subscribe/" onclick="window.location.href='account/account_subscribe/'">查看投诉</a></li>
+        <li style="text-align: center"><a href="#">看房记录</a></li>
+        <li style="text-align: center"><a href="#">我的搜索</a></li>
+        <li style="text-align: center"><a href="#">我的问答</a></li>
+        <li style="text-align: center"><a href="#">我的经纪人</a></li>
+      </ul>
+      <hr class="hidden-sm hidden-md hidden-lg">
+            <br />
+        </nav>
+    </div>
+      <!-- 信息 -->
+    <div class="col-sm-8 " style="background:white;border:rgb(238, 238, 238) solid;border-radius: 10px">
+        <br />
+        <p><font size="4" face="arial" color="black">| 我的信息</font></p>
+        <hr style="height:1px;border:none;border-top:1px solid #555555;" />
+        <form class="form-horizontal" role="form">
+  <div class="form-group">
+    <label for="firstname" class="col-sm-2 control-label">用户名</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="name" placeholder="{{ user.username }}">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="lastname" class="col-sm-2 control-label">邮箱</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="email" placeholder="{{ user.email }}">
+    </div>
+  </div>
+            <div class="form-group">
+    <label for="lastname" class="col-sm-2 control-label">我的签名</label>
+    <div class="col-sm-10">
+      <textarea class="form-control" rows="3"></textarea>
+    </div>
+  </div>
+   <div class="form-group">
+    <label for="lastname" class="col-sm-2 control-label">性别</label>
+    <div class="col-sm-10">
+      <label class="radio-inline">
+        <input type="radio" name="optionsRadiosinline" id="optionsRadios3" value="option1" checked>男
+    </label>
+    <label class="radio-inline">
+        <input type="radio" name="optionsRadiosinline" id="optionsRadios4"  value="option2">女
+    </label>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-primary">保 存</button>
+    </div>
+  </div>
+</form>
+    </div>
+  </div>
+    </ul>
+</div>
+<!--页脚-->
+    <footer style=" background-color: rgb(0,0,0); color: rgb(255, 255, 255); padding: 30px 50px;height: auto;width: 100%;margin-top: 80px;">
+        <div style="display: flex; flex-direction: column; align-items: center;">
+            <div style="margin: 8px 0px;">Copyright ©2020  by 王勇
+            </div>
+            <div style="margin: 8px 0px;">违法和不良信息举报电话：010-86440676 违法和不良信息举报邮箱：672515431@qq.com</div>
+            <div style="margin: 8px 0px;">联系电话:18888888888</div>
+            <div style="width: 300px;height: 1px; background-color: #FFFFFF;margin-top: 20px;"></div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,135 @@
+@import url(http://fonts.useso.com/css?family=Source+Sans+Pro:200,300);
+*{
+    padding: 0;
+    margin: 0;
+    font-weight: 300;
+}
+body
+{
+    background-image:url("../../img/3.jpg");
+    background-repeat: no-repeat;
+    background-size:620px 800px;
+}
+.demo p{text-align:center;margin: 24px;text-indent: 0;font-family: "华文行楷";font-size:70px;color: #fff6e3}
+#demo-5{position: absolute;top:30%;left: 80px}
+.container{
+    font-family: ‘Source Sans Pro’, sans-serif;
+    color: black;
+    font-weight: 300;
+    max-width: 400px;
+    height: 400px;
+    margin: 80px auto 0 auto;
+    position: absolute;
+    right:20%;
+}
+
+.container h1{
+   text-align: center;
+    width: 100%;
+    color: black;
+    font-size: 40px;
+    font-weight: 400;
+    font-family: "黑体";
+}
+.container p {
+    text-align:left;
+    width:100%;
+    color:black;
+    font-size:5px;
+    font-weight:200;
+    font-family: "宋体";
+}
+#p1{
+    text-align: center;
+    width:100%;
+    color:black;
+    font-size:10px;
+    font-weight:200;
+    font-family:"黑体";
+    text-decoration: underline;
+}
+form {
+    padding: 20px 0;
+    position: relative;
+    z-index: 2;
+}
+#p2{
+    text-align:left;
+    width:100%;
+    color:black;
+    font-size:20px;
+    font-weight:200;
+    font-family: "宋体";
+}
+form input{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: 0;
+    display: block;
+    margin: 0 auto 10px auto;
+    border: 1px solid black;
+    background-color: white;
+    border-radius:3px;
+    width: 400px;
+    font-size: 18px;
+    text-align: center;
+    padding: 10px 0;
+    color: black;
+    font-weight: 300;
+}
+#input1{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: 0;
+    display: block;
+    margin: 0 auto 10px auto;
+    border: 1px solid black;
+    background-color: black;
+    border-radius:3px;
+    width: 400px;
+    font-size: 18px;
+    text-align: center;
+    padding: 10px 0;
+    color: white;
+    font-weight: 300;
+}
+form input:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+form button{
+    width: 250px;
+    padding: 10px 15px;
+    background-color: black;
+    color: white;
+    border: 0;
+    border-radius: 3px;
+    font-size: 18px;
+    cursor: pointer;
+    display: block;
+    margin:0 auto;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+form button:hover{
+    background-color: black;
+}
+.alert-warning{
+    text-align: center;
+    line-height: 40px;
+    background: #fff6e3;
+    top:300px;
+    width: 250px;
+    height: 40px;
+    color: brown;
+    border-radius: 3px;
+    position: absolute;
+    right: 20%;
+    font-size:18px;
+    font-weight: 300;
+    margin: 0 auto 10px auto;
+}
